@@ -1,11 +1,12 @@
+import dao.UserDao;
 import exception.DBException;
+import model.User;
 import service.UserService;
 
-public class Main {
-    public static void main(String[] args) throws DBException {
-        UserService userService = new UserService();
-        userService.createTable();
+import java.sql.SQLException;
+import java.util.List;
 
-        System.out.println("hello");
+public class Main {
+    public static void main(String[] args) throws DBException, SQLException {
     }
 }

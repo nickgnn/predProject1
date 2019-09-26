@@ -6,10 +6,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class Executor {
-    public static int execUpdate(Connection connection, String query) throws SQLException {
+    public static long execUpdate(Connection connection, String query) throws SQLException {
         Statement statement = connection.createStatement();
         statement.execute(query);
-        int updated = statement.getUpdateCount();
+        long updated = statement.getUpdateCount();
         statement.close();
 
         return updated;
