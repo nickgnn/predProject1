@@ -33,65 +33,117 @@ public class UserDao {
     }
 
     public void createTable() throws SQLException {
-        Executor.execUpdate(connection, "CREATE TABLE IF NOT EXISTS `users` (\n" +
-                "  `id` BIGINT NOT NULL AUTO_INCREMENT,\n" +
-                "  `name` VARCHAR(45) NOT NULL,\n" +
-                "  `age` INT NOT NULL,\n" +
-                "  PRIMARY KEY (`id`));");
+        String sql = "CREATE TABLE IF NOT EXISTS `users` (\n" +
+                     " `id` BIGINT NOT NULL AUTO_INCREMENT,\n" +
+                     " `name` VARCHAR(45) NOT NULL,\n" +
+                     " `age` INT NOT NULL,\n" +
+                     "PRIMARY KEY (`id`))";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.execute();
+        preparedStatement.close();
+//        connection.close();
     }
 
     public void dropTable() throws SQLException {
-        Executor.execUpdate(connection, "DROP TABLE IF EXISTS `users`");
+        String sql = "DROP TABLE IF EXISTS `users`";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.execute();
+        preparedStatement.close();
+//        connection.close();
     }
 
     public List<User> getAllUsers() throws SQLException {
-        List<User> list = Executor.execQuery(connection, "SELECT * FROM `users`", resultSet -> {
-            List<User> list1 = new ArrayList<>();
-            resultSet.last();
-            long endOfList = resultSet.getRow();
+        String sql = "SELECT * FROM `users`";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        ResultSet resultSet = preparedStatement.executeQuery();
 
-            resultSet.first();
+        List<User> list = new ArrayList<>();
+        resultSet.last();
+        long endOfList = resultSet.getRow();
 
-            for (int i = 1; i <= endOfList; i++) {
-                list1.add(new User(
-                        resultSet.getLong("id"),
-                        resultSet.getString("name"),
-                        resultSet.getInt("age")));
+        resultSet.first();
 
-                resultSet.next();
-            }
+        for (int i = 1; i <= endOfList; i++) {
+            list.add(new User(
+                    resultSet.getLong("id"),
+                    resultSet.getString("name"),
+                    resultSet.getInt("age")));
 
-            return list1;
-        });
+            resultSet.next();
+        }
+
+        resultSet.close();
+        preparedStatement.close();
+//        connection.close();
 
         return list;
     }
 
-    public void addUser(String name, int age) throws SQLException {
+    public int addUser(String name, int age) throws SQLException {
         User user = new User();
         user.setName(name);
+        int rows = 0;
 
         if (!getAllUsers().contains(user)) {
-            Executor.execUpdate(connection, "INSERT INTO `users` (`name`, `age`)" +
-                    " VALUES ('" + name + "', '" + age + "');\n");
+            String sql = "INSERT INTO `users` (`name`, `age`) VALUES (?, ?)";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, name);
+            preparedStatement.setInt(2, age);
+
+            rows = preparedStatement.executeUpdate();
+
+            preparedStatement.close();
+//            connection.close();
+        } else {
+            System.out.println("This name already exists, choose another name:)");
+//            connection.close();
         }
+
+        return rows;
     }
 
     public User getUser(String name) throws SQLException {
-        return Executor.execQuery(connection, "SELECT * FROM `users` WHERE (`name` = '" + name + "')", resultSet -> {
-            resultSet.next();
-            return new User(resultSet.getLong("id"),
+        String sql = "SELECT * FROM `users` WHERE (`name` = ?)";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setString(1, name);
+
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        resultSet.next();
+
+        User user = new User(resultSet.getLong("id"),
                     resultSet.getString("name"),
                     resultSet.getInt("age"));
-        });
+
+        resultSet.close();
+        preparedStatement.close();
+//        connection.close();
+
+        return user;
     }
 
     public void updateUser(User user, String name) throws SQLException {
-        Executor.execUpdate(connection, "UPDATE `users` SET `name` = '" + name + "' WHERE (`id` = '" + user.getId() + "')");
+        String sql = "UPDATE `users` SET `name` = ? WHERE (`id` = ?)";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setString(1, name);
+        preparedStatement.setLong(2, user.getId());
+
+        preparedStatement.execute();
+
+        preparedStatement.close();
+//        connection.close();
     }
 
     public void updateUser(User user, int age) throws SQLException {
-        Executor.execUpdate(connection, "UPDATE `users` SET `age` = '" + age + "' WHERE (`id` = '" + user.getId() + "')");
+        String sql = "UPDATE `users` SET `age` = ? WHERE (`id` = ?)";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setInt(1, age);
+        preparedStatement.setLong(2, user.getId());
+
+        preparedStatement.execute();
+
+        preparedStatement.close();
+//        connection.close();
     }
 
     public long getClientIdByName(String name) throws SQLException {
@@ -107,6 +159,12 @@ public class UserDao {
     }
 
     public void deleteUser(String name) throws SQLException {
-        Executor.execUpdate(connection, "DELETE FROM `users` WHERE (`name` = '" + name + "')");
+        String sql = "DELETE FROM `users` WHERE (`name` = ?)";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setString(1, name);
+
+        preparedStatement.execute();
+        preparedStatement.close();
+//        connection.close();
     }
 }
