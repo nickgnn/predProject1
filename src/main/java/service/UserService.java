@@ -11,31 +11,8 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class UserService {
-    private static Connection getMysqlConnection() {
-        try {
-            DriverManager.registerDriver((Driver) Class.forName("com.mysql.cj.jdbc.Driver").newInstance());
-            StringBuilder url = new StringBuilder();
-
-            url.
-                    append("jdbc:mysql://").        //db type
-                    append("localhost:").           //host name
-                    append("3306/").                //port
-                    append("db_example?").          //db name
-                    append("user=root&").          //login
-                    append("password=1234").       //password
-                    append("&serverTimezone=Europe/Moscow");
-
-            System.out.println("URL: " + url + "\n");
-            Connection connection = DriverManager.getConnection(url.toString());
-            return connection;
-        } catch (SQLException | InstantiationException | IllegalAccessException | ClassNotFoundException e) {
-            e.printStackTrace();
-            throw new IllegalStateException();
-        }
-    }
-
     private static UserDao getUserDao() {
-        return new UserDao(getMysqlConnection());
+        return new UserDao();
     }
 
     public void createTable() throws DBException {
