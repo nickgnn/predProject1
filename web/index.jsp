@@ -16,5 +16,13 @@
 
    <p><a href="/login.jsp">Login</a></p>
 
+
+   <form action="/users" method="post">
+       <input type="submit" value="Show Users">
+   </form>
+
+
+
+
 </body>
 </html>

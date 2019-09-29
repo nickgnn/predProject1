@@ -34,6 +34,14 @@
             <version>9.0.26</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/org.apache.tomcat/tomcat-jdbc -->
+        <dependency>
+            <groupId>org.apache.tomcat</groupId>
+            <artifactId>tomcat-jdbc</artifactId>
+            <version>9.0.26</version>
+        </dependency>
+
+
 
     </dependencies>
 

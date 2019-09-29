@@ -7,6 +7,9 @@
         <element id="directory" name="classes">
           <element id="module-output" name="predProject1" />
         </element>
+        <element id="directory" name="lib">
+          <element id="library" level="application" name="mysql-connector-java-8.0.17" />
+        </element>
       </element>
     </root>
   </artifact>

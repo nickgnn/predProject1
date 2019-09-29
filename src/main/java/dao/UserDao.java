@@ -41,7 +41,6 @@ public class UserDao {
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         preparedStatement.execute();
         preparedStatement.close();
-//        connection.close();
     }
 
     public void dropTable() throws SQLException {
@@ -49,7 +48,6 @@ public class UserDao {
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         preparedStatement.execute();
         preparedStatement.close();
-//        connection.close();
     }
 
     public List<User> getAllUsers() throws SQLException {
@@ -74,7 +72,6 @@ public class UserDao {
 
         resultSet.close();
         preparedStatement.close();
-//        connection.close();
 
         return list;
     }
@@ -93,10 +90,8 @@ public class UserDao {
             rows = preparedStatement.executeUpdate();
 
             preparedStatement.close();
-//            connection.close();
         } else {
             System.out.println("This name already exists, choose another name:)");
-//            connection.close();
         }
 
         return rows;
@@ -117,7 +112,6 @@ public class UserDao {
 
         resultSet.close();
         preparedStatement.close();
-//        connection.close();
 
         return user;
     }
@@ -131,7 +125,6 @@ public class UserDao {
         preparedStatement.execute();
 
         preparedStatement.close();
-//        connection.close();
     }
 
     public void updateUser(User user, int age) throws SQLException {
@@ -143,7 +136,6 @@ public class UserDao {
         preparedStatement.execute();
 
         preparedStatement.close();
-//        connection.close();
     }
 
     public long getClientIdByName(String name) throws SQLException {
@@ -165,6 +157,5 @@ public class UserDao {
 
         preparedStatement.execute();
         preparedStatement.close();
-//        connection.close();
     }
 }

@@ -18,26 +18,26 @@ public class Main {
 
         service.getAllUsers().forEach(System.out::println);
 
-        service.updateUser(service.getUserByName("nick"), 1);
-        service.updateUser(service.getUserByName("dick"), 1);
-        service.updateUser(service.getUserByName("quick"), 1);
-        service.updateUser(service.getUserByName("vick"), 1);
-        service.updateUser(service.getUserByName("brick"), 1);
-        service.updateUser(service.getUserByName("kick"), 1);
-        service.updateUser(service.getUserByName("pick"), 1);
-        service.updateUser(service.getUserByName("frick"), 1);
-
-        service.deleteUser("nick");
-        service.getAllUsers().forEach(System.out::println);
-
-        service.updateUser(service.getUserByName("nick"), "1");
-        service.updateUser(service.getUserByName("dick"), "2");
-        service.updateUser(service.getUserByName("quick"), "3");
-        service.updateUser(service.getUserByName("vick"), "4");
-        service.updateUser(service.getUserByName("brick"), "5");
-        service.updateUser(service.getUserByName("kick"), "6");
-        service.updateUser(service.getUserByName("pick"), "7");
-        service.updateUser(service.getUserByName("frick"), "8");
+//        service.updateUser(service.getUserByName("nick"), 1);
+//        service.updateUser(service.getUserByName("dick"), 1);
+//        service.updateUser(service.getUserByName("quick"), 1);
+//        service.updateUser(service.getUserByName("vick"), 1);
+//        service.updateUser(service.getUserByName("brick"), 1);
+//        service.updateUser(service.getUserByName("kick"), 1);
+//        service.updateUser(service.getUserByName("pick"), 1);
+//        service.updateUser(service.getUserByName("frick"), 1);
+//
+//        service.deleteUser("nick");
+//        service.getAllUsers().forEach(System.out::println);
+//
+//        service.updateUser(service.getUserByName("nick"), "1");
+//        service.updateUser(service.getUserByName("dick"), "2");
+//        service.updateUser(service.getUserByName("quick"), "3");
+//        service.updateUser(service.getUserByName("vick"), "4");
+//        service.updateUser(service.getUserByName("brick"), "5");
+//        service.updateUser(service.getUserByName("kick"), "6");
+//        service.updateUser(service.getUserByName("pick"), "7");
+//        service.updateUser(service.getUserByName("frick"), "8");
 
 
 

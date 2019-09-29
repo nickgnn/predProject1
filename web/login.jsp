@@ -11,13 +11,30 @@
     <title>Login</title>
 </head>
 <body>
+<p><a href="/">Main</a></p>
 
-    <form action="/loginServlet" method="post">
-        Login: <input type="text" name="user"><br>
-        Password: <input type="password" name="pass"><br>
-        <input type="submit" value="Enter">
-
-    </form>
-
+<form action="/users" method="post">
+    <table>
+            <tbody>
+            <tr>
+                <td>Login:</td>
+                <td>
+                    <input type="text" name="user">
+                </td>
+            </tr>
+            <tr>
+                <td>Password:</td>
+                <td>
+                    <input type="password" name="pass">
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <input type="submit" value="Enter">
+                </td>
+            </tr>
+            </tbody>
+        </table>
+</form>
 </body>
 </html>
