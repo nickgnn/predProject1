@@ -1,23 +1,15 @@
 package service;
 
-import dao.UserDao;
 import exception.DBException;
 import model.User;
 
-import java.sql.Connection;
-import java.sql.Driver;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.List;
 
-public class UserService {
-    private static UserDao getUserDao() {
-        return new UserDao();
-    }
-
+public class UserService implements Service {
     public void createTable() throws DBException {
         try {
-            getUserDao().createTable();
+            dao.createTable();
         } catch (SQLException e) {
             throw new DBException(e);
         }
@@ -25,7 +17,7 @@ public class UserService {
 
     public void cleanUp() throws DBException {
         try {
-            getUserDao().dropTable();
+            dao.dropTable();
         } catch (SQLException e) {
             throw new DBException(e);
         }
@@ -33,7 +25,7 @@ public class UserService {
 
     public List<User> getAllUsers() throws DBException {
         try {
-            return getUserDao().getAllUsers();
+            return dao.getAllUsers();
         } catch (SQLException e) {
             throw new DBException(e);
         }
@@ -41,7 +33,7 @@ public class UserService {
 
     public void addUser(String name, int age) throws DBException {
         try {
-            getUserDao().addUser(name, age);
+            dao.addUser(name, age);
         } catch (SQLException e) {
             throw new DBException(e);
         }
@@ -49,7 +41,7 @@ public class UserService {
 
     public User getUserByName(String name) throws DBException {
         try {
-            return getUserDao().getUser(name);
+            return dao.getUser(name);
         } catch (SQLException e) {
             throw new DBException(e);
         }
@@ -57,7 +49,7 @@ public class UserService {
 
     public void updateUser(User user, String name) throws DBException {
         try {
-            getUserDao().updateUser(user, name);
+            dao.updateUser(user, name);
         } catch (SQLException e) {
             throw new DBException(e);
         }
@@ -65,7 +57,7 @@ public class UserService {
 
     public void updateUser(User user, int age) throws DBException {
         try {
-            getUserDao().updateUser(user, age);
+            dao.updateUser(user, age);
         } catch (SQLException e) {
             throw new DBException(e);
         }
@@ -73,7 +65,7 @@ public class UserService {
 
     public void deleteUser(String name) throws DBException {
         try {
-            getUserDao().deleteUser(name);
+            dao.deleteUser(name);
         } catch (SQLException e) {
             throw new DBException(e);
         }
@@ -81,7 +73,7 @@ public class UserService {
 
     public long getUserIdByName(String name) throws DBException {
         try {
-            return getUserDao().getClientIdByName(name);
+            return dao.getClientIdByName(name);
         } catch (SQLException e) {
             throw new DBException(e);
         }

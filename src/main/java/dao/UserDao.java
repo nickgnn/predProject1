@@ -6,32 +6,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserDao {
-    private Connection connection = getMysqlConnection();
-
-    private static Connection getMysqlConnection() {
-        try {
-            DriverManager.registerDriver((Driver) Class.forName("com.mysql.cj.jdbc.Driver").newInstance());
-            StringBuilder url = new StringBuilder();
-
-            url.
-                    append("jdbc:mysql://").        //db type
-                    append("localhost:").           //host name
-                    append("3306/").                //port
-                    append("db_example?").          //db name
-                    append("user=root&").          //login
-                    append("password=1234").       //password
-                    append("&serverTimezone=Europe/Moscow");
-
-            System.out.println("URL: " + url + "\n");
-            Connection connection = DriverManager.getConnection(url.toString());
-            return connection;
-        } catch (SQLException | InstantiationException | IllegalAccessException | ClassNotFoundException e) {
-            e.printStackTrace();
-            throw new IllegalStateException();
-        }
-    }
-
+public class UserDao implements DAO {
     public void createTable() throws SQLException {
         String sql = "CREATE TABLE IF NOT EXISTS `users` (\n" +
                      " `id` BIGINT NOT NULL AUTO_INCREMENT,\n" +
@@ -56,18 +31,12 @@ public class UserDao {
         ResultSet resultSet = preparedStatement.executeQuery();
 
         List<User> list = new ArrayList<>();
-        resultSet.last();
-        long endOfList = resultSet.getRow();
 
-        resultSet.first();
-
-        for (int i = 1; i <= endOfList; i++) {
+        while (resultSet.next()) {
             list.add(new User(
                     resultSet.getLong("id"),
                     resultSet.getString("name"),
                     resultSet.getInt("age")));
-
-            resultSet.next();
         }
 
         resultSet.close();
@@ -77,11 +46,10 @@ public class UserDao {
     }
 
     public int addUser(String name, int age) throws SQLException {
-        User user = new User();
-        user.setName(name);
+        User user = getUser(name);
         int rows = 0;
 
-        if (!getAllUsers().contains(user)) {
+        if (user == null) {
             String sql = "INSERT INTO `users` (`name`, `age`) VALUES (?, ?)";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, name);
@@ -102,13 +70,17 @@ public class UserDao {
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setString(1, name);
 
+        User user;
+
         ResultSet resultSet = preparedStatement.executeQuery();
 
-        resultSet.next();
-
-        User user = new User(resultSet.getLong("id"),
+        if (resultSet.next()) {
+            user = new User(resultSet.getLong("id"),
                     resultSet.getString("name"),
                     resultSet.getInt("age"));
+        } else {
+            return null;
+        }
 
         resultSet.close();
         preparedStatement.close();

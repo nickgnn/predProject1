@@ -76,7 +76,7 @@
         <th><%=user.getId()%></th>
         <th><%=user.getName()%></th>
         <th><%=user.getAge()%></th>
-        <td><form>
+        <td><form action="/edit" method="post">
             <table>
                 <tbody>
                 <tr>

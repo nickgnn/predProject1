@@ -1,11 +1,12 @@
 import exception.DBException;
+import model.User;
 import service.UserService;
 
 public class Main {
     public static void main(String[] args) throws DBException {
         UserService service = new UserService();
-        service.cleanUp();
-        service.createTable();
+//        service.cleanUp();
+//        service.createTable();
 
         service.addUser("nick", 18);
         service.addUser("dick", 28);
@@ -17,6 +18,11 @@ public class Main {
         service.addUser("frick", 77);
 
         service.getAllUsers().forEach(System.out::println);
+
+        User mick = service.getUserByName("mick");
+
+
+        System.out.println(mick);
 
 //        service.updateUser(service.getUserByName("nick"), 1);
 //        service.updateUser(service.getUserByName("dick"), 1);
