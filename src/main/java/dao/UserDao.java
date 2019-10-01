@@ -110,13 +110,25 @@ public class UserDao implements DAO {
         preparedStatement.close();
     }
 
+    public void updateUser(User user, Long ID) throws SQLException {
+        String sql = "UPDATE `users` SET `id` = ? WHERE (`id` = ?)";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setLong(1, ID);
+        preparedStatement.setLong(2, user.getId());
+
+        preparedStatement.execute();
+
+        preparedStatement.close();
+    }
+
     public long getClientIdByName(String name) throws SQLException {
         long id = 0;
+        User user = getUser(name);
 
-        for (User user : getAllUsers()) {
-            if (user.getName().equals(name)) {
-                id = user.getId();
-            }
+        if (user == null) {
+            return id;
+        } else {
+            id = user.getId();
         }
 
         return id;

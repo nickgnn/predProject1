@@ -24,6 +24,8 @@ public interface DAO {
 
     void updateUser(User user, int age) throws SQLException;
 
+    void updateUser(User user, Long ID) throws SQLException;
+
     long getClientIdByName(String name) throws SQLException;
 
     void deleteUser(String name) throws SQLException;

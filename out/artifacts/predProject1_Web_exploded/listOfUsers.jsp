@@ -82,23 +82,27 @@
                 <tr>
                     <td>Edit id:</td>
                     <td>
-                        <input type="number" name="id">
+                        <input type="number" name="newId">
                     </td>
                 </tr>
                 <tr>
                     <td>Edit Name:</td>
                     <td>
-                        <input type="text" name="name">
+                        <input type="text" name="newName">
                     </td>
                 </tr>
                 <tr>
                     <td>Edit age:</td>
                     <td>
-                        <input type="number" name="age">
+                        <input type="number" name="newAge">
                     </td>
                 </tr>
                 <tr>
                     <td>
+                        <input type="hidden" name="id" value=<%=user.getId()%>>
+                        <input type="hidden" name="name" value=<%=user.getName()%>>
+                        <input type="hidden" name="age" value=<%=user.getAge()%>>
+
                         <input type="submit" value="Edit User">
                     </td>
                 </tr>
@@ -113,7 +117,7 @@
                     <tbody>
                     <tr>
                         <td>
-                            <input type="hidden" name="name" value="<%request.setAttribute(user.getName(), new Object());%>"/>
+                            <input type="hidden" name="name" value=<%=user.getName()%>>
                         </td>
                     </tr>
                     <tr>

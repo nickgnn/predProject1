@@ -22,7 +22,7 @@ public class UsersServlet extends HttpServlet {
             req.setAttribute("usersList", allUsers);
             req.getRequestDispatcher("listOfUsers.jsp").forward(req, resp);
 
-            allUsers.forEach(System.out::println);
+//            allUsers.forEach(System.out::println);
         } catch (DBException e) {
             e.getMessage();
         }

@@ -5,8 +5,8 @@ import service.UserService;
 public class Main {
     public static void main(String[] args) throws DBException {
         UserService service = new UserService();
-//        service.cleanUp();
-//        service.createTable();
+        service.cleanUp();
+        service.createTable();
 
         service.addUser("nick", 18);
         service.addUser("dick", 28);

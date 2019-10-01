@@ -63,6 +63,14 @@ public class UserService implements Service {
         }
     }
 
+    public void updateUser(User user, Long id) throws DBException {
+        try {
+            dao.updateUser(user, id);
+        } catch (SQLException e) {
+            throw new DBException(e);
+        }
+    }
+
     public void deleteUser(String name) throws DBException {
         try {
             dao.deleteUser(name);

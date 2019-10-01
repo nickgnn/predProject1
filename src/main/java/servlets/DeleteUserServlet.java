@@ -15,10 +15,6 @@ public class DeleteUserServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         UserService service = new UserService();
         String name = req.getParameter("name");
-        String name1 = (String)req.getAttribute("name");
-
-
-        System.out.println("name is: " + name);
 
         req.getRequestDispatcher("/users").forward(req, resp);
 
@@ -27,8 +23,6 @@ public class DeleteUserServlet extends HttpServlet {
         } catch (DBException e) {
             e.printStackTrace();
         }
-    }
-
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        System.out.println(name + " IS DELETED!");
     }
 }

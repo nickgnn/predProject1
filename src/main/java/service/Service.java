@@ -23,6 +23,8 @@ public interface Service {
 
     void updateUser(User user, int age) throws DBException;
 
+    void updateUser(User user, Long id) throws DBException;
+
     void deleteUser(String name) throws DBException;
 
     long getUserIdByName(String name) throws DBException;
