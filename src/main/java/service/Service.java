@@ -25,7 +25,9 @@ public interface Service {
 
     void updateUser(User user, Long id) throws DBException;
 
-    void deleteUser(String name) throws DBException;
+    void deleteUserByName(String name) throws DBException;
+
+    void deleteUserById(Long id) throws DBException;
 
     long getUserIdByName(String name) throws DBException;
 }

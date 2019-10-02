@@ -17,22 +17,26 @@ public class EditUserServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         UserService service = new UserService();
 
-        String newId = req.getParameter("newId");
+//        String newId = req.getParameter("newId");
         String newName = req.getParameter("newName");
         String newAge = req.getParameter("newAge");
 
-        Long id = Long.valueOf(req.getParameter("id"));
+//        Long id = Long.valueOf(req.getParameter("id"));
         String name = req.getParameter("name");
         int age = Integer.valueOf(req.getParameter("age"));
 
-        System.out.println("----------------------");
-        System.out.println("newId is: " + newId);
-        System.out.println("newAge is: " + newAge);
-        System.out.println("newName is: " + newName);
-        System.out.println("id is: " + id);
-        System.out.println("name is: " + name);
-        System.out.println("age is: " + age);
-        System.out.println("----------------------");
+//        System.out.println("----------------------");
+//
+////        System.out.println("newId is: " + newId);
+//
+//        System.out.println("newAge is: " + newAge);
+//        System.out.println("newName is: " + newName);
+//
+////        System.out.println("id is: " + id);
+//
+//        System.out.println("name is: " + name);
+//        System.out.println("age is: " + age);
+//        System.out.println("----------------------");
 
         req.getRequestDispatcher("/users").forward(req, resp);
 
@@ -41,24 +45,24 @@ public class EditUserServlet extends HttpServlet {
         try {
             user = service.getUserByName(name);
 
-            System.out.println(user.getName() + " is NAME of user");
-            System.out.println(user.getId() + " is ID of user");
-            System.out.println(user.getAge() + " is AGE os user");
+//            System.out.println(user.getName() + " is NAME of user");
+//            System.out.println(user.getId() + " is ID of user");
+//            System.out.println(user.getAge() + " is AGE os user");
 
 
-            if (!newName.equals("") | !newName.equals(name)) {
+            if (!newName.equals("")) {
                 service.updateUser(user, newName);
             }
 
-            if (!newAge.equals("") | !newAge.equals(age)) {
+            if (!newAge.equals("")) {
                 service.updateUser(user, Integer.valueOf(newAge));
             }
 
-            if (!newId.equals("") | !newId.equals(id)) {
-                service.updateUser(user, Long.valueOf(newId));
-            }
+//            if (!newId.equals("") | !newId.equals(id)) {
+//                service.updateUser(user, Long.valueOf(newId));
+//            }
         } catch (DBException e) {
-                e.printStackTrace();
+                e.getMessage();
             }
     }
 }

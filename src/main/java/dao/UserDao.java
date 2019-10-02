@@ -134,10 +134,20 @@ public class UserDao implements DAO {
         return id;
     }
 
-    public void deleteUser(String name) throws SQLException {
+    public void deleteUserByName(String name) throws SQLException {
         String sql = "DELETE FROM `users` WHERE (`name` = ?)";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setString(1, name);
+
+        preparedStatement.execute();
+        preparedStatement.close();
+    }
+
+    public void deleteUserById(Long id) throws SQLException {
+        String sql = "DELETE FROM `users` WHERE (`id` = ?)";
+
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setLong(1, id);
 
         preparedStatement.execute();
         preparedStatement.close();

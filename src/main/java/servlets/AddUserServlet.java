@@ -10,19 +10,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/delete")
-public class DeleteUserServlet extends HttpServlet {
+@WebServlet("/add")
+public class AddUserServlet extends HttpServlet {
+    @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         UserService service = new UserService();
-        Long id = Long.valueOf(req.getParameter("id"));
+
+        String name = req.getParameter("name");
+        String age = req.getParameter("age");
 
         req.getRequestDispatcher("/users").forward(req, resp);
 
         try {
-            service.deleteUserById(id);
+            service.addUser(name, Integer.valueOf(age));
         } catch (DBException e) {
             e.getMessage();
         }
-//        System.out.println("User with id = " + id + " IS DELETED!");
     }
 }

@@ -28,5 +28,7 @@ public interface DAO {
 
     long getClientIdByName(String name) throws SQLException;
 
-    void deleteUser(String name) throws SQLException;
+    void deleteUserByName(String name) throws SQLException;
+
+    void deleteUserById(Long id) throws SQLException;
 }

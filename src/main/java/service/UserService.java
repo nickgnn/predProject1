@@ -71,9 +71,18 @@ public class UserService implements Service {
         }
     }
 
-    public void deleteUser(String name) throws DBException {
+    public void deleteUserByName(String name) throws DBException {
         try {
-            dao.deleteUser(name);
+            dao.deleteUserByName(name);
+        } catch (SQLException e) {
+            throw new DBException(e);
+        }
+    }
+
+    @Override
+    public void deleteUserById(Long id) throws DBException {
+        try {
+            dao.deleteUserById(id);
         } catch (SQLException e) {
             throw new DBException(e);
         }

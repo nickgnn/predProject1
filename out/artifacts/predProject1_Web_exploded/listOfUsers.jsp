@@ -16,15 +16,15 @@
 <p><a href="/">Main</a></p>
 
 
-<form action="/users" method="post">
+<form action="/add" method="post">
     <table>
                 <tbody>
-                <tr>
-                    <td>ID:</td>
-                    <td>
-                        <input type="number" name="id">
-                    </td>
-                </tr>
+                <%--<tr>--%>
+                    <%--<td>ID:</td>--%>
+                    <%--<td>--%>
+                        <%--<input type="number" name="id">--%>
+                    <%--</td>--%>
+                <%--</tr>--%>
                 <tr>
                     <td>Name:</td>
                     <td>
@@ -79,12 +79,12 @@
         <td><form action="/edit" method="post">
             <table>
                 <tbody>
-                <tr>
-                    <td>Edit id:</td>
-                    <td>
-                        <input type="number" name="newId">
-                    </td>
-                </tr>
+                <%--<tr>--%>
+                    <%--<td>Edit id:</td>--%>
+                    <%--<td>--%>
+                        <%--<input type="number" name="newId">--%>
+                    <%--</td>--%>
+                <%--</tr>--%>
                 <tr>
                     <td>Edit Name:</td>
                     <td>
@@ -99,7 +99,7 @@
                 </tr>
                 <tr>
                     <td>
-                        <input type="hidden" name="id" value=<%=user.getId()%>>
+                        <%--<input type="hidden" name="id" value=<%=user.getId()%>>--%>
                         <input type="hidden" name="name" value=<%=user.getName()%>>
                         <input type="hidden" name="age" value=<%=user.getAge()%>>
 
@@ -117,7 +117,7 @@
                     <tbody>
                     <tr>
                         <td>
-                            <input type="hidden" name="name" value=<%=user.getName()%>>
+                            <input type="hidden" name="id" value=<%=user.getId()%>>
                         </td>
                     </tr>
                     <tr>
