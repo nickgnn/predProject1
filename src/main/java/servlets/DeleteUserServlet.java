@@ -12,7 +12,7 @@ import java.io.IOException;
 
 @WebServlet("/delete")
 public class DeleteUserServlet extends HttpServlet {
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         UserService service = new UserService();
         Long id = Long.valueOf(req.getParameter("id"));
 
